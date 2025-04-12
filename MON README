@@ -1,0 +1,120 @@
+📦 Laravel Stock Management API
+Cette API permet à un utilisateur authentifié de :
+
+Créer un compte et se connecter
+
+Gérer les produits (CRUD)
+
+Enregistrer des entrées (approvisionnements)
+
+Enregistrer des sorties (ventes ou retraits)
+
+Voir l’état du stock pour chaque produit
+
+🚀 Installation du projet
+bash
+Copier
+Modifier
+git clone https://github.com/votre-utilisateur/votre-projet.git
+cd votre-projet
+
+# Installer les dépendances
+composer install
+
+# Copier et configurer l'environnement
+cp .env.example .env
+php artisan key:generate
+
+# Configurer la base de données dans le fichier .env
+DB_DATABASE=nom_de_la_base
+DB_USERNAME=utilisateur
+DB_PASSWORD=motdepasse
+
+# Exécuter les migrations
+php artisan migrate
+
+# Installer Sanctum
+composer require laravel/sanctum
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+🔐 Authentification
+Utilise Laravel Sanctum pour la gestion des tokens.
+
+Toutes les routes sont protégées par auth:sanctum, sauf :
+
+POST /api/register
+
+POST /api/login
+
+📬 Endpoints API disponibles
+🔑 Authentification
+Méthode	URL	Description
+POST	/api/register	Créer un compte
+POST	/api/login	Se connecter (retour token)
+POST	/api/logout	Se déconnecter (auth requis)
+📦 Produits
+Méthode	URL	Description
+GET	/api/products	Lister tous les produits
+POST	/api/products	Ajouter un produit
+PUT	/api/products/{id}	Modifier un produit
+DELETE	/api/products/{id}	Supprimer un produit (logique)
+GET	/api/products/stock	Voir le stock de chaque produit
+➕ Entrées (approvisionnements)
+Méthode	URL	Description
+POST	/api/entries	Ajouter une entrée (produit, quantité, date)
+➖ Sorties (ventes ou retraits)
+Méthode	URL	Description
+POST	/api/outputs	Ajouter une sortie (produit, quantité, date)
+🧪 Test de l'API
+Utilise Postman ou Thunder Client.
+
+Envoie le token dans les requêtes protégées :
+
+http
+Copier
+Modifier
+Authorization: Bearer VOTRE_TOKEN
+Une collection Postman est disponible dans le dossier /postman_collection/ (à créer si besoin).
+
+🛠 Technologies utilisées
+Laravel 12
+
+Laravel Sanctum
+
+MySQL
+
+Eloquent ORM
+
+Postman / Thunder Client
+
+❗ Si Sanctum ne marche pas
+Voici les choses à vérifier :
+
+Sanctum est bien installé avec :
+
+bash
+Copier
+Modifier
+composer require laravel/sanctum
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan migrate
+Dans config/sanctum.php, stateful contient localhost si tu testes en local.
+
+Dans app/Http/Kernel.php :
+
+php
+Copier
+Modifier
+'api' => [
+    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+    'throttle:api',
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+],
+Dans les routes protégées :
+
+php
+Copier
+Modifier
+Route::middleware('auth:sanctum')->group(function () {
+    
+});
