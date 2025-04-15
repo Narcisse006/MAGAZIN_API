@@ -5,6 +5,7 @@ use App\Http\Controllers\EntryController;
 use App\Http\Controllers\OutputController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\StockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,8 @@ Route::prefix('produits/{produit}')->group(function () {
     Route::apiResource('outputs', OutputController::class)->only(['index', 'store']);
 });
 
+//Pour afficher l'etat du stock d'un produit
+Route::get('/produits/{produit}/stock', [StockController::class, 'show']);
+
+//Pour afficher l'etat du stock de tous les produits
+Route::get('/stocks', [StockController::class, 'index']);

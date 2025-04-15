@@ -11,12 +11,14 @@ Enregistrer des sorties (ventes ou retraits)
 
 Voir l’état du stock pour chaque produit
 
+Voir letat du stock de toute les produit
+
 🚀 Installation du projet
 bash
 Copier
 Modifier
-git clone https://github.com/votre-utilisateur/votre-projet.git
-cd votre-projet
+git clone https://github.com/Narcisse006/MAGAZIN_API.git
+cd MAGAZIN_API
 
 # Installer les dépendances
 composer install
@@ -26,9 +28,9 @@ cp .env.example .env
 php artisan key:generate
 
 # Configurer la base de données dans le fichier .env
-DB_DATABASE=nom_de_la_base
-DB_USERNAME=utilisateur
-DB_PASSWORD=motdepasse
+DB_DATABASE=Magazin-Api
+DB_USERNAME=root
+DB_PASSWORD=
 
 # Exécuter les migrations
 php artisan migrate
@@ -65,6 +67,10 @@ POST	/api/entries	Ajouter une entrée (produit, quantité, date)
 ➖ Sorties (ventes ou retraits)
 Méthode	URL	Description
 POST	/api/outputs	Ajouter une sortie (produit, quantité, date)
+
+GET	/api/stocks	Lister letat du stock de chaque produit
+GET	/api/stocks/{id}	Lister letat de  sorties d’un produit
+
 🧪 Test de l'API
 Utilise Postman ou Thunder Client.
 
@@ -74,7 +80,7 @@ http
 Copier
 Modifier
 Authorization: Bearer VOTRE_TOKEN
-Une collection Postman est disponible dans le dossier /postman_collection/ (à créer si besoin).
+Une collection Postman est disponible dans le dossier https://narcisseogoudikpe.postman.co/workspace/Narcisse-OGOUDIKPE's-Workspace~3217478c-14e4-4402-8388-578e4e13d3e2/request/43879490-defa4d11-8ad7-4b57-850b-d783fd1c1faa?action=share&creator=43879490&ctx=documentation
 
 🛠 Technologies utilisées
 Laravel 12
@@ -85,7 +91,7 @@ MySQL
 
 Eloquent ORM
 
-Postman / Thunder Client
+Postman 
 
 ❗ Si Sanctum ne marche pas
 Voici les choses à vérifier :
@@ -118,3 +124,5 @@ Modifier
 Route::middleware('auth:sanctum')->group(function () {
     
 });
+
+Merci de votre attention ! 
